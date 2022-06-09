@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import * as C from './App.styles';
 import * as Photos from './services/photos';
 import { Photo } from './types/Photo';
+import { PhotoItem } from './components/PhotoItem';
 
 function App() {
 
@@ -15,14 +16,20 @@ function App() {
       setLoading(false);
     }
     getPhotos();
-  }, [])
+  }, []);
+
+  const handleFormSubmit = () => {
+    1h03m
+  }
 
   return (
     <C.Container>
       <C.Area>
         <C.Header>Galeria de Fotos</C.Header>
 
-        {/* Área de upload */}
+        <C.UploadForm method="POST" onSubmit={handleFormSubmit} >
+
+        </C.UploadForm>
 
         {loading && 
           <C.ScreenWarning>
@@ -34,7 +41,7 @@ function App() {
         {!loading && photos.length > 0 && 
           <C.PhotoList>
             {photos.map((item, index) => (
-              <div>{item.name}</div>
+              <PhotoItem key={index} url={item.url} name={item.name} />
             ))}
           </C.PhotoList>
         }
